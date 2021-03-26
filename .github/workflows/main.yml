@@ -22,10 +22,12 @@ jobs:
     strategy:
       matrix:
         include:
+          - VERSION: "18.04"
           - VERSION: "20.04"
           - VERSION: "20.10"
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: Test ubuntu
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 

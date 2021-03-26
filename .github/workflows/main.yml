@@ -22,7 +22,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - VERSION: "20.10"
+          - VERSION: "20.04"
           - VERSION: "20.10"
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:

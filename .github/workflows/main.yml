@@ -26,25 +26,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Configure environment and install needed packages
-        run: |
-          sudo apt-get update
-          sudo export DEBIAN_FRONTEND=noninteractive
-          sudo apt-get install -y tzdata
-          sudo ln -fs /usr/share/zoneinfo/Europe/Warsaw /etc/localtime
-          sudo dpkg-reconfigure --frontend noninteractive tzdata
-          sudo apt-get install -y -qq php
-          sudo apt-get install sudo
-          sudo echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-          sudo useradd -ms /bin/bash ubuntu
-          sudo usermod -aG sudo ubuntu
-          ./devilswarm init
-          
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+        run: docker-compose build
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      - name: Test
+        run: docker-compose run ubuntu ./devilswarm init

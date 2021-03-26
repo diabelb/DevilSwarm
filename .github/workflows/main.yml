@@ -27,16 +27,16 @@ jobs:
 
       - name: Configure environment and install needed packages
         run: |
-          apt-get update
-          export DEBIAN_FRONTEND=noninteractive
-          apt-get install -y tzdata
-          ln -fs /usr/share/zoneinfo/Europe/Warsaw /etc/localtime
-          dpkg-reconfigure --frontend noninteractive tzdata
-          apt-get install -y -qq php
-          apt-get install sudo
-          echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-          useradd -ms /bin/bash ubuntu
-          usermod -aG sudo ubuntu
+          sudo apt-get update
+          sudo export DEBIAN_FRONTEND=noninteractive
+          sudo apt-get install -y tzdata
+          sudo ln -fs /usr/share/zoneinfo/Europe/Warsaw /etc/localtime
+          sudo dpkg-reconfigure --frontend noninteractive tzdata
+          sudo apt-get install -y -qq php
+          sudo apt-get install sudo
+          sudo echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+          sudo useradd -ms /bin/bash ubuntu
+          sudo usermod -aG sudo ubuntu
           ./devilswarm init
           
       # Runs a single command using the runners shell

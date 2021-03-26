@@ -1,4 +1,5 @@
-FROM ubuntu:20.10
+ARG VERSION=latest
+FROM ubuntu:$VERSION
 RUN apt-get update
 
 RUN export DEBIAN_FRONTEND=noninteractive

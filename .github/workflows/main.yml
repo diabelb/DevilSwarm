@@ -42,7 +42,8 @@ jobs:
 
       - name: ssh into box after boot
         run: |
-          vagrant ssh swarmnode1 -c "devilswarm init"
+          vagrant ssh manager -c "curl -fsSL https://raw.githubusercontent.com/diabelb/DevilSwarm/master/install | bash"
+          vagrant ssh manager -c "devilswarm init"
 
 
 #      - name: Configure environment and install needed packages

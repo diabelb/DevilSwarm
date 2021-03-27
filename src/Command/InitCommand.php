@@ -4,6 +4,7 @@
 namespace DevilSwarm\Command;
 
 use DevilSwarm\Process\GetIPAddresses;
+use DevilSwarm\Process\InitSwarm;
 use DevilSwarm\Process\InstallCurl;
 use DevilSwarm\Process\InstallDocker;
 use DevilSwarm\Process\InstallNetTools;
@@ -54,7 +55,7 @@ class InitCommand extends Command
         }
         $output->writeln('Swarm advertise ip: '.$advertiseIP);
 
-        $command = new InstallDocker();
+        (new InitSwarm($advertiseIP, new InstallDocker()))->execute();
         // ... put here the code to create the user
 
         // this method must return an integer number with the "exit status code"

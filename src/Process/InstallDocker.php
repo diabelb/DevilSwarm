@@ -15,7 +15,8 @@ class InstallDocker extends BashCommandDecorator
         echo "Installing docker...";
         Process::fromShellCommandline('curl -fsSL https://get.docker.com -o get-docker.sh')->mustRun();
         Process::fromShellCommandline('sudo sh get-docker.sh')->mustRun();
-        Process::fromShellCommandline('sudo usermod -aG docker ubuntu')->mustRun();
+        Process::fromShellCommandline('sudo usermod -aG docker $user')->mustRun();
+        Process::fromShellCommandline('newgrp docker')->mustRun();
         Process::fromShellCommandline('docker ps')->mustRun();
         echo "OK\n";
     }

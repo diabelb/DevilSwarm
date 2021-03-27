@@ -37,6 +37,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-vagrant-
 
+      - name: Set up ssh-key
+        run: ssh-keygen -t rsa -b 4096 -C 'test@test.com'
+
       - name: Run vagrant up
         run: vagrant up
 

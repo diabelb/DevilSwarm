@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-sudo apt-get install -y git php
+sudo apt-get install -y git php php-zip
 curl -sS https://getcomposer.org/installer -o composer-setup.php
 sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 

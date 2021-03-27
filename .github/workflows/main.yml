@@ -1,36 +1,51 @@
-## This is a basic workflow to help you get started with Actions
-#
-#name: CI
-#
-## Controls when the action will run.
-#on:
-#  # Triggers the workflow on push or pull request events but only for the master branch
-#  push:
-#    branches: [ master ]
-#  pull_request:
-#    branches: [ master ]
-#
-#  # Allows you to run this workflow manually from the Actions tab
-#  workflow_dispatch:
-#
-## A workflow run is made up of one or more jobs that can run sequentially or in parallel
-#jobs:
-#  # This workflow contains a single job called "build"
-#  test_ubuntu:
-#    # The type of runner that the job will run on
-#    runs-on: ubuntu-latest
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  test_ubuntu:
+    # The type of runner that the job will run on
+    runs-on: macos-10.15
 #    strategy:
 #      matrix:
 #        include:
 #          - VERSION: "20.04"
 #          - VERSION: "20.10"
-#    # Steps represent a sequence of tasks that will be executed as part of the job
-#    steps:
-#      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-#      - uses: actions/checkout@v2
-#
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Cache Vagrant boxes
+        uses: actions/cache@v2
+        with:
+          path: ~/.vagrant.d/boxes
+          key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile') }}
+          restore-keys: |
+            ${{ runner.os }}-vagrant-
+
+      - name: Run vagrant up
+        run: vagrant up
+
+      - name: ssh into box after boot
+        run: vagrant ssh swarmnode1 -c "echo 'hello world!'"
+
+
 #      - name: Configure environment and install needed packages
 #        run: docker-compose build --build-arg VERSION=${{ matrix.VERSION }}
-#
-#      - name: Test
-#        run: docker-compose run ubuntu ./devilswarm init
+
+      - name: Test
+        run: docker-compose run ubuntu ./devilswarm init

@@ -3,6 +3,8 @@
 
 namespace DevilSwarm\Command;
 
+use DevilSwarm\Process\InstallCurl;
+use DevilSwarm\Process\InstallDocker;
 use DevilSwarm\Process\SetHostName;
 use DevilSwarm\Process\UpdatePackages;
 use Symfony\Component\Console\Command\Command;
@@ -39,7 +41,7 @@ class InitCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
 
-        $command = new SetHostName('swarm-master-1', new UpdatePackages());
+        $command = new InstallDocker(new InstallCurl(new SetHostName('swarm-master-1', new UpdatePackages())));
         $command->execute();
 
         // ... put here the code to create the user

@@ -5,7 +5,7 @@ sudo apt-get install -y git php php-zip
 curl -sS https://getcomposer.org/installer -o composer-setup.php
 sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
-
-git clone https://github.com/diabelb/DevilSwarm.git
+git clone https://github.com/diabelb/DevilSwarm.git /tmp/devilswarm
 cd DevilSwarm
 composer install
+sudo ln -s /tmp/devilswarm/devilswarm /usr/bin/devilswarm

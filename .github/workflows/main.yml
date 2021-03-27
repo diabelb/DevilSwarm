@@ -38,7 +38,7 @@ jobs:
             ${{ runner.os }}-vagrant-
 
       - name: Set up ssh-key
-        run: ssh-keygen -t rsa -b 4096 -C 'test@test.com'
+        run: ssh-keygen -t rsa -b 4096 -C 'test@test.com' -f /Users/runner/.ssh/id_rsa
 
       - name: Run vagrant up
         run: vagrant up

@@ -41,11 +41,13 @@ jobs:
         run: vagrant up
 
       - name: ssh into box after boot
-        run: vagrant ssh swarmnode1 -c "echo 'hello world!'"
+        run: |
+          vagrant ssh swarmnode1
+          curl -fsSL https://raw.githubusercontent.com/diabelb/DevilSwarm/master/install | bash
 
 
 #      - name: Configure environment and install needed packages
 #        run: docker-compose build --build-arg VERSION=${{ matrix.VERSION }}
 
-      - name: Test
-        run: docker-compose run ubuntu ./devilswarm init
+#      - name: Test
+#        run: docker-compose run ubuntu ./devilswarm init

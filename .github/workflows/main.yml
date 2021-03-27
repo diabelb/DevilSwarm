@@ -47,6 +47,8 @@ jobs:
         run: |
           vagrant ssh manager -c "curl -fsSL https://raw.githubusercontent.com/diabelb/DevilSwarm/master/install | bash"
           vagrant ssh manager -c "devilswarm init"
+          vagrant ssh manager -c "ssh-keyscan -H 10.0.7.11 >> ~/.ssh/known_hosts"
+          vagrant ssh manager -c "ssh vagrant@10.0.7.11"
 
 
 #      - name: Configure environment and install needed packages

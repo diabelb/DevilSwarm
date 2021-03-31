@@ -8,6 +8,7 @@ use DevilSwarm\Process\InitSwarm;
 use DevilSwarm\Process\InstallCurl;
 use DevilSwarm\Process\InstallDocker;
 use DevilSwarm\Process\InstallNetTools;
+use DevilSwarm\Process\LocalCommand;
 use DevilSwarm\Process\SetHostName;
 use DevilSwarm\Process\UpdatePackages;
 use Symfony\Component\Console\Command\Command;
@@ -47,7 +48,7 @@ class InitCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        (new InstallNetTools(new InstallCurl(new SetHostName('swarm-master-1', new UpdatePackages()))))->execute();
+        (new InstallNetTools(new InstallCurl(new SetHostName('swarm-master-1', new UpdatePackages(new LocalCommand())))))->execute();
 
         $advertiseIP = $input->getOption('advertise-addr');
         if (!$advertiseIP) {
@@ -55,7 +56,7 @@ class InitCommand extends Command
         }
         $output->writeln('Swarm advertise ip: '.$advertiseIP);
 
-        (new InitSwarm($advertiseIP, new InstallDocker()))->execute();
+        (new InitSwarm($advertiseIP, new InstallDocker(new LocalCommand())))->execute();
         // ... put here the code to create the user
 
         // this method must return an integer number with the "exit status code"
@@ -73,12 +74,12 @@ class InitCommand extends Command
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
-     * @return array
+     * @return string|null
      */
     protected function getAdvertiseIP(InputInterface $input, OutputInterface $output): ?string
     {
         $deviceIPs = [];
-        $command = new GetIPAddresses($deviceIPs);
+        $command = new GetIPAddresses($deviceIPs, new LocalCommand());
         $command->execute();
 
         $ip = null;

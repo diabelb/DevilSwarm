@@ -13,7 +13,7 @@ class UpdatePackages extends BashCommandDecorator
         $this->command->execute();
 
         echo "Updating packages...";
-        Process::fromShellCommandline('sudo apt-get update -y -qq')->run();
+        $this->getProcessFactory()->createProcess('sudo apt-get update -y -qq')->mustRun();
         echo "OK\n";
     }
 }

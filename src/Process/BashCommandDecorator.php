@@ -10,13 +10,13 @@ abstract class BashCommandDecorator implements BashCommand
      */
     protected BashCommand $command;
 
-    public function __construct(?BashCommand $command = null)
+    public function __construct(BashCommand $command)
     {
-        if (isset($command)) {
-            $this->command = $command;
-        }
-        else {
-            $this->command = new InitialCommand();
-        }
+        $this->command = $command;
+    }
+
+    public function getProcessFactory(): ProcessFactory
+    {
+        return $this->command->getProcessFactory();
     }
 }

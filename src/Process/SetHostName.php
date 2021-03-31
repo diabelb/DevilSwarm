@@ -10,7 +10,7 @@ class SetHostName extends BashCommandDecorator
 {
     private string $hostname;
 
-    public function __construct(string $hostname, ?BashCommand $command = null)
+    public function __construct(string $hostname, BashCommand $command = null)
     {
         parent::__construct($command);
         $this->hostname = $hostname;
@@ -21,7 +21,7 @@ class SetHostName extends BashCommandDecorator
         $this->command->execute();
 
         echo "Setting hostname: ".$this->hostname."...";
-        Process::fromShellCommandline("hostnamectl set-hostname ".$this->hostname)->run();
+        $this->getProcessFactory()->createProcess("hostnamectl set-hostname ".$this->hostname)->mustRun();
         echo "OK\n";
     }
 }

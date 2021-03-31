@@ -11,7 +11,7 @@ class GetIPAddresses extends BashCommandDecorator
 
     private array $resultIPs;
 
-    public function __construct(array &$resultIPs, ?BashCommand $command = null)
+    public function __construct(array &$resultIPs, BashCommand $command)
     {
         parent::__construct($command);
         $this->resultIPs = &$resultIPs;

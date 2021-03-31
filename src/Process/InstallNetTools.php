@@ -13,7 +13,7 @@ class InstallNetTools extends BashCommandDecorator
         $this->command->execute();
 
         echo "Installing net-tools...";
-        Process::fromShellCommandline('sudo apt-get install net-tools -y')->mustRun();
+        $this->getProcessFactory()->createProcess('sudo apt-get install net-tools -y')->mustRun();
         echo "OK\n";
     }
 }

@@ -13,7 +13,7 @@ class InstallCurl extends BashCommandDecorator
         $this->command->execute();
 
         echo "Installing curl...";
-        Process::fromShellCommandline('sudo apt-get install curl -y')->mustRun();
+        $this->getProcessFactory()->createProcess('sudo apt-get install curl -y')->mustRun();
         echo "OK\n";
     }
 }

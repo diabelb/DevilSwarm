@@ -21,7 +21,7 @@ class SetHostName extends BashCommandDecorator
         $this->command->execute();
 
         echo "Setting hostname: ".$this->hostname."...";
-        $this->getProcessFactory()->createProcess("hostnamectl set-hostname ".$this->hostname)->mustRun();
+        $this->getProcessFactory()->createProcess("sudo hostnamectl set-hostname ".$this->hostname)->mustRun();
         echo "OK\n";
     }
 }

@@ -3,14 +3,15 @@
 
 namespace DevilSwarm\Command;
 
-use DevilSwarm\BashCommand\GetIPAddresses;
-use DevilSwarm\BashCommand\InitSwarm;
-use DevilSwarm\BashCommand\InstallCurl;
-use DevilSwarm\BashCommand\InstallDocker;
-use DevilSwarm\BashCommand\InstallNetTools;
+use DevilSwarm\BashCommand\Decorators\GetIPAddresses;
+use DevilSwarm\BashCommand\Decorators\InitSwarm;
+use DevilSwarm\BashCommand\Decorators\InstallCurl;
+use DevilSwarm\BashCommand\Decorators\InstallDocker;
+use DevilSwarm\BashCommand\Decorators\InstallNetTools;
+use DevilSwarm\BashCommand\LocalBashCommandFactory;
 use DevilSwarm\BashCommand\LocalCommand;
-use DevilSwarm\BashCommand\SetHostName;
-use DevilSwarm\BashCommand\UpdatePackages;
+use DevilSwarm\BashCommand\Decorators\SetHostName;
+use DevilSwarm\BashCommand\Decorators\UpdatePackages;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -47,15 +48,15 @@ class InitCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        (new InstallNetTools(new InstallCurl(new SetHostName('swarm-master-1', new UpdatePackages(new LocalCommand())))))->execute();
+        $bashCommandFactory = new LocalBashCommandFactory();
 
-        $advertiseIP = $input->getOption('advertise-addr');
-        if (!$advertiseIP) {
-            $advertiseIP = $this->getAdvertiseIP($input, $output);
-        }
+        $bashCommandFactory->createInitNodeCommand('swarm-master-1')->execute();
+
+        $advertiseIP = $this->getAdvertiseIP($input, $output);
+
         $output->writeln('Swarm advertise ip: '.$advertiseIP);
 
-        (new InitSwarm($advertiseIP, new InstallDocker(new LocalCommand())))->execute();
+        (new InitSwarm($advertiseIP, new LocalCommand()))->execute();
         // ... put here the code to create the user
 
         // this method must return an integer number with the "exit status code"
@@ -77,6 +78,10 @@ class InitCommand extends Command
      */
     protected function getAdvertiseIP(InputInterface $input, OutputInterface $output): ?string
     {
+        if ($advertiseIP = $input->getOption('advertise-addr')) {
+            return $advertiseIP;
+        }
+
         $deviceIPs = [];
         $command = new GetIPAddresses($deviceIPs, new LocalCommand());
         $command->execute();

@@ -1,10 +1,11 @@
 <?php
 
 
-namespace DevilSwarm\BashCommand;
+namespace DevilSwarm\BashCommand\Decorators;
 
 
-use Symfony\Component\Process\Process;
+use DevilSwarm\BashCommand\BashCommand;
+use DevilSwarm\BashCommand\BashCommandDecorator;
 
 class SetHostName extends BashCommandDecorator
 {

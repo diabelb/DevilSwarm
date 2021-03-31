@@ -1,9 +1,10 @@
 <?php
 
 
-namespace DevilSwarm\BashCommand;
+namespace DevilSwarm\BashCommand\Decorators;
 
 
+use DevilSwarm\BashCommand\BashCommandDecorator;
 use Symfony\Component\Process\Process;
 
 class InstallDocker extends BashCommandDecorator

@@ -1,9 +1,11 @@
 <?php
 
 
-namespace DevilSwarm\BashCommand;
+namespace DevilSwarm\BashCommand\Decorators;
 
 
+use DevilSwarm\BashCommand\BashCommand;
+use DevilSwarm\BashCommand\BashCommandDecorator;
 use Symfony\Component\Process\Process;
 
 class InitSwarm extends BashCommandDecorator

@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DevilSwarm\BashCommand;
+namespace DevilSwarm\BashCommand\Decorators;
 
 
-use Symfony\Component\Process\Process;
+use DevilSwarm\BashCommand\BashCommandDecorator;
 
 class UpdatePackages extends BashCommandDecorator
 {

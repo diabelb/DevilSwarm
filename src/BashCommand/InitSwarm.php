@@ -1,7 +1,7 @@
 <?php
 
 
-namespace DevilSwarm\Process;
+namespace DevilSwarm\BashCommand;
 
 
 use Symfony\Component\Process\Process;
@@ -10,7 +10,7 @@ class InitSwarm extends BashCommandDecorator
 {
     private string $advertiseAddr;
 
-    public function __construct(string $advertiseAddr, ?BashCommand $command = null)
+    public function __construct(string $advertiseAddr, BashCommand $command)
     {
         parent::__construct($command);
         $this->advertiseAddr = $advertiseAddr;

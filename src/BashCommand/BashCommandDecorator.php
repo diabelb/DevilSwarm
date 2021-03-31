@@ -1,7 +1,9 @@
 <?php
 
 
-namespace DevilSwarm\Process;
+namespace DevilSwarm\BashCommand;
+
+use DevilSwarm\Process\ProcessFactory;
 
 abstract class BashCommandDecorator implements BashCommand
 {

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace DevilSwarm\Process;
+namespace DevilSwarm\BashCommand;
 
 
 use Symfony\Component\Process\Process;
@@ -10,7 +10,7 @@ class SetHostName extends BashCommandDecorator
 {
     private string $hostname;
 
-    public function __construct(string $hostname, BashCommand $command = null)
+    public function __construct(string $hostname, BashCommand $command)
     {
         parent::__construct($command);
         $this->hostname = $hostname;

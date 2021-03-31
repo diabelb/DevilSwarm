@@ -3,16 +3,15 @@
 
 namespace DevilSwarm\Command;
 
-use DevilSwarm\Process\GetIPAddresses;
-use DevilSwarm\Process\InitSwarm;
-use DevilSwarm\Process\InstallCurl;
-use DevilSwarm\Process\InstallDocker;
-use DevilSwarm\Process\InstallNetTools;
-use DevilSwarm\Process\LocalCommand;
-use DevilSwarm\Process\SetHostName;
-use DevilSwarm\Process\UpdatePackages;
+use DevilSwarm\BashCommand\GetIPAddresses;
+use DevilSwarm\BashCommand\InitSwarm;
+use DevilSwarm\BashCommand\InstallCurl;
+use DevilSwarm\BashCommand\InstallDocker;
+use DevilSwarm\BashCommand\InstallNetTools;
+use DevilSwarm\BashCommand\LocalCommand;
+use DevilSwarm\BashCommand\SetHostName;
+use DevilSwarm\BashCommand\UpdatePackages;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;

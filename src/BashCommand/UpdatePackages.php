@@ -1,7 +1,7 @@
 <?php
 
 
-namespace DevilSwarm\Process;
+namespace DevilSwarm\BashCommand;
 
 
 use Symfony\Component\Process\Process;

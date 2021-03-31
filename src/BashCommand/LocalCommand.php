@@ -1,8 +1,11 @@
 <?php
 
 
-namespace DevilSwarm\Process;
+namespace DevilSwarm\BashCommand;
 
+
+use DevilSwarm\Process\LocalProcessFactory;
+use DevilSwarm\Process\ProcessFactory;
 
 class LocalCommand implements BashCommand
 {
